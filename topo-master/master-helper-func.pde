@@ -52,7 +52,7 @@ void printMatrix(uint8_t maxtrix_size) {
 	for (uint8_t i = 0; i < maxtrix_size; i++) {
 		for (uint8_t j = 0; j < maxtrix_size; j++) {
 			if (topology[i][j].id == 0)
-				Serial.print("░░"); // set console to read UTF-8
+				Serial.print("--"); // set console to read UTF-8 ░░
 			else
 				printHEX(&topology[i][j].id, 1);
 			Serial.print(" ");
