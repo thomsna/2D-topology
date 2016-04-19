@@ -21,7 +21,7 @@ struct Graph {
 	Edge *edges;
 	uint8_t used;
 	uint8_t size;
-};
+}; 
 
 // dynamic array allocation helper functions
 void initGraph(Graph *items, uint8_t init_size) {
@@ -38,7 +38,7 @@ void insertEdge(Graph *items, Edge element) {
 	items->edges[items->used++] = element;
 }
 
-void destroyGraph(struct Graph *items) {
+void destroyGraph(Graph *items) {
 	free(items->edges);
 	items->edges = NULL;
 	items->used = items->size = 0;
@@ -49,33 +49,33 @@ Graph graph;
 
 
 // this data structure is used for the DFS tool
-typedef struct _bundle {
+struct Bundle {
 	uint8_t val1;
 	uint8_t val2;
-} bundle;
+};
 
-typedef struct _Array {
-	bundle *array;
+struct Array {
+	Bundle *array;
 	uint8_t used;
 	uint8_t size;
-} Array;
+};
 
 // dynamic array allocation helper functions
-void initItems(struct _Array *items, uint8_t initialSize) {
-	items->array = (bundle *)malloc(initialSize * sizeof(bundle));
+void initItems(Array *items, uint8_t initialSize) {
+	items->array = (Bundle *)malloc(initialSize * sizeof(Bundle));
 	items->used = 0;
 	items->size = initialSize;
 }
 
-void addItem(struct _Array *items, bundle element) {
+void addItem(Array *items, Bundle element) {
 	if (items->used == items->size) {
 		items->size *= 2;
-		items->array = (bundle *)realloc(items->array, items->size * sizeof(bundle));
+		items->array = (Bundle *)realloc(items->array, items->size * sizeof(Bundle));
 	}
 	items->array[items->used++] = element;
 }
 
-void destroyItems(struct _Array *items) {
+void destroyItems(Array *items) {
 	free(items->array);
 	items->array = NULL;
 	items->used = items->size = 0;
@@ -89,10 +89,10 @@ Array path; // used for DFS() as a temporary layer
 // used to store the modules position (and function)
 // aka the network topology
 // the modules are stored in a matrix
-typedef struct _Module {
+struct Module {
 	uint8_t id;
 	uint8_t func;
-} Module;
+};
 
 Module **topology;
 
