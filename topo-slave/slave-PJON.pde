@@ -13,7 +13,7 @@ void bus_receiver(uint8_t length, uint8_t *payload) {
 		// if the MAC address is this device's MAC
 		if (tmp_UID == big_UID) {
 			bus.set_id(payload[1]); // set address on the bus
-			blink(5,20);
+			blink(5,50);
 		}
 	}
 }
@@ -86,7 +86,7 @@ void clockwork(uint8_t from, uint8_t *payload) {
 
 
 void error_handler(uint8_t code, uint8_t data) {
-	blink(10,20);
+	blink(10,50);
 }
 
 #endif  //_SLAVE_PJON_PDE_

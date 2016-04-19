@@ -20,7 +20,7 @@ void bus_receiver(uint8_t length, uint8_t *payload) {
 }
 
 void error_handler(uint8_t code, uint8_t data) {
-	blink(10, 20);
+	blink(10, 50);
 }
 
 
