@@ -68,6 +68,7 @@ void bootSequence() {
 
 	// avoid collisions on the bus by setting random delay
 	// further reduced by polynomial backoff
+	randomSeed(getSeed());
 	uint16_t send_delay = random();
 	delayMicroseconds(send_delay);
 

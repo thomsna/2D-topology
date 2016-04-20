@@ -9,6 +9,10 @@ void setup() {
 
 	Serial.begin(115200);
 
+	// generate random 32-bit UID
+	randomSeed(getSeed());
+	big_UID = random();
+
 	// functions that define actions to be taken
 	// when a command is received from neighbours
 	com_0.set_receiver(receiver_0);
@@ -19,10 +23,6 @@ void setup() {
 	// when a command is received from master
 	bus.set_receiver(bus_receiver);
 	bus.set_error(error_handler);
-
-	// generate random 32-bit UID
-	randomSeed(getSeed(0));
-	big_UID = random();
 
 	// // generate a UID address using the Entropy.h library
 	// Entropy.initialize();

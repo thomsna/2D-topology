@@ -10,7 +10,7 @@ void bus_receiver(uint8_t length, uint8_t *payload) {
 		// assemble the four last bytes in a uint32_t (Arduino is little endian)
 		uint32_t tmp_UID = (uint32_t)payload[2] << 24 | (uint32_t)payload[3] << 16 | (uint32_t)payload[4] << 8 | (uint32_t)payload[5];
 
-		// if the MAC address is this device's MAC
+		// if the UID address is this device's UID
 		if (tmp_UID == big_UID) {
 			bus.set_id(payload[1]); // set address on the bus
 			blink(5,50);

@@ -11,7 +11,7 @@ void bus_receiver(uint8_t length, uint8_t *payload) {
 		uint32_t node2_UID = (uint32_t)payload[3] << 24 | (uint32_t)payload[4] << 16 | (uint32_t)payload[5] << 8 | (uint32_t)payload[6];		
 
 		// add an edge to the graph with values:
-		// node1, node2, node1UID, node2_UID, port number that is seen on node2
+		// node1, node2, node1_UID, node2_UID, port number that is seen on node2
 		insertEdge(&graph, {payload[2], payload[1], node1_UID, node2_UID, payload[11]});
 
 		// keep on listening if data is still being received
