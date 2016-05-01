@@ -12,6 +12,12 @@ void bootSequence() {
 	initGraph(&graph, ndev); // init graph with ndev elements
 	initItems(&path, ndev);
 
+	// pack big_UID into 8-bit UID[]
+	UID[0] = big_UID >> 24;
+	UID[1] = big_UID >> 16;
+	UID[2] = big_UID >> 8;
+	UID[3] = big_UID;
+
 	// packet to be sent
 	neighbour_msg[0] = 'W';
 	neighbour_msg[1] = MASTER;
@@ -58,8 +64,8 @@ void bootSequence() {
 		bus.receive();
 
 
-	// first edge will always contain master address (01)
-	sort_edges();
+	// // first edge will always contain master address (01)
+	// sort_edges();
 
 	uint8_t new_dev;
 	uint8_t dev_UID[4];
@@ -90,16 +96,12 @@ void bootSequence() {
 				dev_UID[3] = graph.edges[i].node2_UID;
 
 				char new_address[6] = {'N', new_dev, dev_UID[0], dev_UID[1], dev_UID[2], dev_UID[3]};
-				
-				int send_new_address;
-				while (send_new_address != ACK)
-					send_new_address = bus.send_string(graph.edges[i].node2, new_address, 6);
 
-				// int send_new_address = bus.send(graph.edges[i].node2, new_address, 6);
+				int send_new_address = bus.send(graph.edges[i].node2, new_address, 6);
 
-				// scan_time = millis();
-				// while (millis() - scan_time < 500)
-				// 	bus.update();
+				scan_time = millis();
+				while (millis() - scan_time < 500)
+					bus.update();
 
 				// update graph with new unique address
 				for (uint8_t k = 0; k < graph.used; k++) {
@@ -115,7 +117,7 @@ void bootSequence() {
 
 	// get depth of graph
 	// traverse(from, to, port, start depth, get max depth)
-	traverse(graph.edges[0].node1, maxdev, graph.edges[0].port, 0, 1); 
+	traverse(graph.edges[0].node1, 255, graph.edges[0].port, 0, 1); 
 	destroyItems(&path);
 	initItems(&path, ndev);
 
@@ -140,7 +142,7 @@ void bootSequence() {
 
 	// populate matrix with nodes corresponding to network topology
 	// traverse(from, to, port, start depth, build topology)
-	traverse(graph.edges[0].node1, maxdev, graph.edges[0].port, 0, 4);
+	traverse(graph.edges[0].node1, 255, graph.edges[0].port, 0, 4);
 	destroyItems(&path);
 	initItems(&path, ndev);
 
@@ -152,29 +154,29 @@ void bootSequence() {
 void consoleDebug() {
 
 	Serial.println();
-	Serial.println("Devices found ");
-	Serial.println("-------------");
+	Serial.println("Devices found");
+	printLine(13);
 	printDevices();
 
 	Serial.println();
-	Serial.println("Edges ");
-	Serial.println("-----");
+	Serial.println("Edges");
+	printLine(5);
 	printEdges();
 
 	// print all paths
 	Serial.println();
-	Serial.println("DFS");
-	Serial.println("---");
-	traverse(graph.edges[0].node1, maxdev, graph.edges[0].port, 0, 3); 
+	Serial.print("DFS (depth: ");
+	Serial.print(maxdepth);
+	Serial.println(")");
+	printLine(3);
+	traverse(graph.edges[0].node1, 255, graph.edges[0].port, 0, 3); 
 	destroyItems(&path);
 	initItems(&path, ndev);
-	Serial.println("---");
-	Serial.print("Depth: ");
-	Serial.println(maxdepth);
 	Serial.println();
 
+	Serial.println("Topology");
+	printLine(8);
 	Serial.println();
-
 	printMatrix(matrix_size);
 	Serial.println();
 

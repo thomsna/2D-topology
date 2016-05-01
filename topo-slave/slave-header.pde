@@ -13,10 +13,10 @@
 PJON bus(12); 
 
 // define addresses for PJON interconnects
-const uint8_t addr_0 = 1;
-const uint8_t addr_90 = 2;
-const uint8_t addr_180 = 3;
-const uint8_t addr_270 = 4;
+const uint8_t addr_0 = 2;
+const uint8_t addr_90 = 3;
+const uint8_t addr_180 = 4;
+const uint8_t addr_270 = 5;
 
 // const uint8_t inter = 255;
 
@@ -38,6 +38,7 @@ const uint8_t port_270 = 4;
 const uint8_t MASTER = 1; // PJON master address
 const uint8_t maxdev = 254; // maximum number of devices
 char neighbour_msg[7];
+uint32_t scan_time;
 uint8_t ringbuf[4] = {port_0, port_90, port_180, port_270};
 uint8_t rand_address;
 uint8_t UID[4];

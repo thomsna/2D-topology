@@ -49,12 +49,45 @@ uint32_t getSeed() {
 
 // prints the matrix containing a representation of 
 // the resulting network topology
+void printMatrixBounds(uint8_t maxtrix_size) {
+	uint8_t up = maxtrix_size;
+	uint8_t down = 0;
+	uint8_t left = maxtrix_size;
+	uint8_t right = 0;
+
+	for (uint8_t i = 0; i < maxtrix_size; i++) {
+		for (uint8_t j = 0; j < maxtrix_size; j++) {
+			if (topology[i][j].id > 0 && right <= j)
+				right = j;
+			if (topology[i][j].id > 0 && left >= j)
+				left = j;
+			if (topology[i][j].id > 0 && up >= i)
+				up = i;
+			if (topology[i][j].id > 0 && down <= i)
+				down = i;
+		}
+	}
+
+	for (uint8_t i = up; i <= down; i++) {
+		for (uint8_t j = left; j <= right; j++) {
+			Serial.print(" ");
+			if (topology[i][j].id == 0)
+				Serial.print("  ");
+			else
+				printHEX(&topology[i][j].id, 1);
+		}
+		Serial.println();
+		Serial.println();
+	}	
+}
+
+// prints the matrix containing a representation of 
+// the resulting network topology
 void printMatrix(uint8_t maxtrix_size) {
 	for (uint8_t i = 0; i < maxtrix_size; i++) {
 		for (uint8_t j = 0; j < maxtrix_size; j++) {
 			if (topology[i][j].id == 0)
-				Serial.print("░░"); // set console to read UTF-8 ░░
-				// Serial.write(176);
+				Serial.print("░░"); // set console to read UTF-8
 			else
 				printHEX(&topology[i][j].id, 1);
 			Serial.print(" ");
@@ -63,6 +96,13 @@ void printMatrix(uint8_t maxtrix_size) {
 		Serial.println();
 	}
 }
+
+void printLine(uint8_t len) {
+	for (uint8_t i = 0; i < len; i++)
+		Serial.print("-");
+	Serial.println();
+}
+
 
 // prints list of devices with their unique ID
 void printDevices() {

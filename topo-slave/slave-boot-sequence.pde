@@ -8,6 +8,12 @@
 
 void bootSequence() {
 
+	// pack big_UID into 8-bit UID[]
+  UID[0] = big_UID >> 24;
+  UID[1] = big_UID >> 16;
+  UID[2] = big_UID >> 8;
+  UID[3] = big_UID;
+
 	// prepare packet to be sent to neighbour
 	// first byte is the command ID
 	// second byte is this device's address
