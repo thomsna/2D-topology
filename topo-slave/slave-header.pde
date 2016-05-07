@@ -9,8 +9,8 @@
 #include <MemoryFree.h>
 
 
-// PJON bus set on pin 12
-PJON bus(12); 
+// PJON bus
+PJON<SoftwareBitBang> bus(255);
 
 // define addresses for PJON interconnects
 const uint8_t addr_0 = 2;
@@ -18,13 +18,17 @@ const uint8_t addr_90 = 3;
 const uint8_t addr_180 = 4;
 const uint8_t addr_270 = 5;
 
-// const uint8_t inter = 255;
+// set PJON addresses for interconnections
+PJON<SoftwareBitBang> com_0(addr_0);
+PJON<SoftwareBitBang> com_90(addr_90);
+PJON<SoftwareBitBang> com_180(addr_180);
+PJON<SoftwareBitBang> com_270(addr_270);
 
-// set PJON pins and addresses for interconnections
-PJON com_0 (6, addr_0);
-PJON com_90 (9, addr_90); 
-PJON com_180 (10, addr_180); 
-PJON com_270 (11, addr_270); 
+// // set PJON pins and addresses for interconnections
+// PJON com_0 (6, addr_0);
+// PJON com_90 (9, addr_90); 
+// PJON com_180 (10, addr_180); 
+// PJON com_270 (11, addr_270); 
 
 // defined for identification of ports.
 // if devices receives from specific port,
