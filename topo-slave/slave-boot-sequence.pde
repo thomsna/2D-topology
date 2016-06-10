@@ -24,33 +24,36 @@ void bootSequence() {
 	neighbour_msg[4] = UID[2]; 
 	neighbour_msg[5] = UID[3];
 
+	delay(1500-millis());
+	blink(1, 10);
+
 	// waiting for neighbour to send its address
 	// keep on listening if nothing has been received yet
 	while (!neighbour_addr) {
-		com_0.receive(12500);
-		com_90.receive(12500);
-		com_180.receive(12500);
-		com_270.receive(12500);
+		com_0.receive(1000);
+		com_90.receive(1000);
+		com_180.receive(1000);
+		com_270.receive(1000);
 	}
 
 	uint32_t scan_time;
 
-	for (uint8_t i = 0; i < 4; i++) {
+	for (uint8_t i = 0; i < 5; i++) {
 		// send this address to neighbour
 		scan_time = millis();
-		while (millis() - scan_time < 60)
+		while (millis() - scan_time < 100)
 			com_0.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 60)
+		while (millis() - scan_time < 100)
 			com_90.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 60)
+		while (millis() - scan_time < 100)
 			com_180.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 60)
+		while (millis() - scan_time < 100)
 			com_270.update();
 	}
 

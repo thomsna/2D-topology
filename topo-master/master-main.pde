@@ -15,8 +15,8 @@ void setup() {
 	randomSeed(getSeed());
 	big_UID = random();
 
-	// Initialize PJON bus
-	bus.set_pin(12);
+	// initialize PJON bus
+	bus.set_pin(4);
 	bus.begin();
 
 	com_0.set_pin(7);
@@ -28,6 +28,8 @@ void setup() {
 	// when a command is received from slaves
 	bus.set_receiver(bus_receiver);
 	bus.set_error(error_handler);
+
+	bus.set_id(MASTER); // set address on the bus
 
 	// start the boot sequence
 	bootSequence();

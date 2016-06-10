@@ -38,23 +38,25 @@ void bootSequence() {
 	neighbour_msg[6] = port_90;
 	int send_270 = com_270.send(addr_90, neighbour_msg, 7);
 
-	blink(1, 5);
+	delay(1500-millis());
+	blink(1, 10);
 
-	for (uint8_t i = 0; i < 3; i++) {
+	for (uint8_t i = 0; i < 5; i++) {
+		// send this address to neighbour
 		scan_time = millis();
-		while (millis() - scan_time < 60)
+		while (millis() - scan_time < 100)
 			com_0.update();
-		
+
 		scan_time = millis();
-		while (millis() - scan_time < 60)
+		while (millis() - scan_time < 100)
 			com_90.update();
-		
+
 		scan_time = millis();
-		while (millis() - scan_time < 60)
+		while (millis() - scan_time < 100)
 			com_180.update();
-		
+
 		scan_time = millis();
-		while (millis() - scan_time < 60)
+		while (millis() - scan_time < 100)
 			com_270.update();
 	}
 	
@@ -174,7 +176,7 @@ void consoleDebug() {
 	initItems(&path, ndev);
 	Serial.println();
 
-	Serial.println("Topology");
+	Serial.println("Topology (UTF-8)");
 	printLine(8);
 	Serial.println();
 	printMatrix(matrix_size);

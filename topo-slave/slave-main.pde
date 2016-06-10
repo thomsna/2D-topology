@@ -13,8 +13,8 @@ void setup() {
 	randomSeed(getSeed());
 	big_UID = random();
 
-	// Initialize PJON bus
-	bus.set_pin(12);
+	// initialize PJON bus
+	bus.set_pin(4);
 	bus.begin();
 
 	com_0.set_pin(7);

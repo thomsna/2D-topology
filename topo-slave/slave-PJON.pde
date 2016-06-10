@@ -4,7 +4,7 @@
 #define _SLAVE_PJON_PDE_
 
 
-void bus_receiver(uint8_t length, uint8_t *payload) {
+void bus_receiver(uint8_t id, uint8_t *payload, uint8_t length) {
 	// set the bus to listen on a new address if the master says so
 	if ((char)payload[0] == 'N') {
 		// assemble the four last bytes in a uint32_t (Arduino is little endian)
@@ -18,22 +18,22 @@ void bus_receiver(uint8_t length, uint8_t *payload) {
 	}
 }
 
-void receiver_0(uint8_t length, uint8_t *payload) {
+void receiver_0(uint8_t id, uint8_t *payload, uint8_t length) {
 	if ((char)payload[0] == 'W') 
 		clockwork(1, payload);
 }
 
-void receiver_90(uint8_t length, uint8_t *payload) {
+void receiver_90(uint8_t id, uint8_t *payload, uint8_t length) {
 	if ((char)payload[0] == 'W') 
 		clockwork(2, payload);
 }
 
-void receiver_180(uint8_t length, uint8_t *payload) {
+void receiver_180(uint8_t id, uint8_t *payload, uint8_t length) {
 	if ((char)payload[0] == 'W') 
 		clockwork(3, payload);
 }
 
-void receiver_270(uint8_t length, uint8_t *payload) {
+void receiver_270(uint8_t id, uint8_t *payload, uint8_t length) {
 	if ((char)payload[0] == 'W') 
 		clockwork(4, payload);
 }

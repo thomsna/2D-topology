@@ -10,7 +10,16 @@
 
 
 // PJON bus
-PJON<SoftwareBitBang> bus(255);
+// Bus id definition
+// uint8_t bus_id[] = {0, 0, 0, 1};
+// uint8_t addr_0_id[] = {0, 0, 0, 2};
+// uint8_t addr_90_id[] = {0, 0, 0, 3};
+// uint8_t addr_180_id[] = {0, 0, 0, 2};
+// uint8_t addr_270_id[] = {0, 0, 0, 3};
+
+PJON<SoftwareBitBang> bus;
+
+const uint8_t MASTER = 1; // the master is at address 1 on the bus
 
 // define addresses for PJON interconnects
 const uint8_t addr_0 = 2;
@@ -24,12 +33,6 @@ PJON<SoftwareBitBang> com_90(addr_90);
 PJON<SoftwareBitBang> com_180(addr_180);
 PJON<SoftwareBitBang> com_270(addr_270);
 
-// // set PJON pins and addresses for interconnections
-// PJON com_0 (6, addr_0);
-// PJON com_90 (9, addr_90); 
-// PJON com_180 (10, addr_180); 
-// PJON com_270 (11, addr_270); 
-
 // defined for identification of ports.
 // if devices receives from specific port,
 // send to resulting addresses
@@ -39,8 +42,8 @@ const uint8_t port_180 = 3;
 const uint8_t port_270 = 4;
 
 
-const uint8_t MASTER = 1; // PJON master address
-const uint8_t maxdev = 254; // maximum number of devices
+const uint8_t maxdev = 255; // maximum number of devices
+const uint8_t activityLED = 13;
 char neighbour_msg[7];
 uint32_t scan_time;
 uint8_t ringbuf[4] = {port_0, port_90, port_180, port_270};
@@ -50,6 +53,7 @@ uint32_t big_UID;
 uint8_t neighbour_UID[4]; // neighbour's UID
 uint8_t this_port;
 uint8_t neighbour_addr = NULL;
+uint32_t synchro;
 
 
 #endif  //_SLAVE_HEADER_PDE_

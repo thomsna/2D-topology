@@ -182,9 +182,9 @@ void printMem() {
 // blink n times, with delay t
 void blink(uint8_t n, uint8_t t) {
 	for (uint8_t i = 0; i < n; i++) {
-		digitalWrite(13, HIGH);
+		digitalWrite(activityLED, HIGH);
 		delay(t);
-		digitalWrite(13, LOW);
+		digitalWrite(activityLED, LOW);
 		delay(t);
 	}
 }
