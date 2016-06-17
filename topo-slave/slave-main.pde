@@ -14,13 +14,13 @@ void setup() {
 	big_UID = random();
 
 	// initialize PJON bus
-	bus.set_pin(4);
+	bus.set_pin(2);
 	bus.begin();
 
-	com_0.set_pin(7);
-	com_90.set_pin(9);
-	com_180.set_pin(8);
-	com_270.set_pin(10);
+	com_0.set_pin(A0);
+	com_90.set_pin(A1);
+	com_180.set_pin(7);
+	com_270.set_pin(8);
 
 	// functions that define actions to be taken
 	// when a command is received from neighbours
@@ -34,7 +34,8 @@ void setup() {
 	bus.set_error(error_handler);
 
 	// random address between 6 and maxdev
-	rand_address = random(6,maxdev);
+	// rand_address = random(6,maxdev);
+	rand_address = 45;
 	bus.set_id(rand_address); // set address on the bus
 
 	// start the boot sequence

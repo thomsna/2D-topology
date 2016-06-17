@@ -38,36 +38,44 @@ void bootSequence() {
 	neighbour_msg[6] = port_90;
 	int send_270 = com_270.send(addr_90, neighbour_msg, 7);
 
-	delay(1500-millis());
-	blink(1, 10);
 
-	for (uint8_t i = 0; i < 5; i++) {
+	delay(3000);
+
+	// uint32_t test = millis();
+	// Serial.print("TEEEEEEEEEST ");
+	// Serial.println(test);
+
+	// delay(1500-millis());
+	blink(1, 200);
+	delay(100);
+
+	for (uint8_t i = 0; i < 1; i++) {
 		// send this address to neighbour
 		scan_time = millis();
-		while (millis() - scan_time < 100)
+		while (millis() - scan_time < 50)
 			com_0.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 100)
+		while (millis() - scan_time < 50)
 			com_90.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 100)
+		while (millis() - scan_time < 50)
 			com_180.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 100)
+		while (millis() - scan_time < 50)
 			com_270.update();
 	}
 	
 
 	scan_time = millis();
 	while (millis() - scan_time < 1500)
-		bus.receive();
+		bus.receive(15);
 
 
-	// // first edge will always contain master address (01)
-	// sort_edges();
+	// first edge will always contain master address (01)
+	sort_edges();
 
 	uint8_t new_dev;
 	uint8_t dev_UID[4];
@@ -188,7 +196,7 @@ void consoleDebug() {
 	Serial.print("Boot time: ");
 	Serial.print(millis());
 	Serial.println("ms");
-	Serial.println();	
+	Serial.println();
 
 }
 

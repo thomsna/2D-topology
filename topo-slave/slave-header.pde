@@ -28,10 +28,10 @@ const uint8_t addr_180 = 4;
 const uint8_t addr_270 = 5;
 
 // set PJON addresses for interconnections
-PJON<SoftwareBitBang> com_0(addr_0);
-PJON<SoftwareBitBang> com_90(addr_90);
-PJON<SoftwareBitBang> com_180(addr_180);
-PJON<SoftwareBitBang> com_270(addr_270);
+PJON<OverSampling> com_0(addr_0);
+PJON<OverSampling> com_90(addr_90);
+PJON<OverSampling> com_180(addr_180);
+PJON<OverSampling> com_270(addr_270);
 
 // defined for identification of ports.
 // if devices receives from specific port,

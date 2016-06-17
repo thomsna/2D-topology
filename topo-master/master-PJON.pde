@@ -12,7 +12,12 @@ void bus_receiver(uint8_t id, uint8_t *payload, uint8_t length) {
 
 		// add an edge to the graph with values:
 		// node1, node2, node1_UID, node2_UID, port number that is seen on node2
-		insertEdge(&graph, {payload[2], payload[1], node1_UID, node2_UID, payload[11]});
+		if (dupe != node2_UID)
+			insertEdge(&graph, {payload[2], payload[1], node1_UID, node2_UID, payload[11]});
+		else
+			Serial.println("dupe!!!");
+
+		dupe = node2_UID;
 
 		// keep on listening if data is still being received
 		scan_time = millis();

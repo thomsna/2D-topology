@@ -28,10 +28,10 @@ const uint8_t addr_180 = 4;
 const uint8_t addr_270 = 5;
 
 // set PJON addresses for interconnections
-PJON<SoftwareBitBang> com_0(addr_0);
-PJON<SoftwareBitBang> com_90(addr_90);
-PJON<SoftwareBitBang> com_180(addr_180);
-PJON<SoftwareBitBang> com_270(addr_270);
+PJON<OverSampling> com_0(addr_0);
+PJON<OverSampling> com_90(addr_90);
+PJON<OverSampling> com_180(addr_180);
+PJON<OverSampling> com_270(addr_270);
 
 // defined for identification of ports.
 // if devices receives from specific port,
@@ -44,7 +44,7 @@ const uint8_t port_270 = 4;
 
 const uint8_t maxdev = 255; // how many devices are expected at max
 const uint8_t ndev = 7; // initialize arrays of size ndev
-const uint8_t activityLED = 13;
+const uint8_t activityLED = 15;
 char neighbour_msg[7];
 uint32_t scan_time;
 uint8_t maxdepth = 0;
@@ -52,7 +52,7 @@ uint8_t matrix_size;
 uint8_t UID[4];
 uint32_t big_UID;
 uint32_t synchro;
-
+uint32_t dupe = 0;
 
 
 #endif  //_MASTER_HEADER_PDE_

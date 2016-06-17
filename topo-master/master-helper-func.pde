@@ -113,7 +113,7 @@ void printDevices() {
 	tmp_UID[2] = graph.edges[0].node1_UID >> 8;
 	tmp_UID[3] = graph.edges[0].node1_UID;
 
-	printHEX(&graph.edges[0].node1, 1); // address
+	printHEX(&graph.edges[0].node1, 1); // master address
 	Serial.print(" (");
 	for (uint8_t j=0; j<4; j++) {
 		printHEX(&tmp_UID[j], 1);
@@ -122,7 +122,7 @@ void printDevices() {
 	Serial.println();
 
 	for (uint8_t i=0; i<graph.used; i++) {
-		printHEX(&graph.edges[i].node2, 1); // address
+		printHEX(&graph.edges[i].node2, 1); // slave addresses
 
 		tmp_UID[0] = graph.edges[i].node2_UID >> 24;
 		tmp_UID[1] = graph.edges[i].node2_UID >> 16;

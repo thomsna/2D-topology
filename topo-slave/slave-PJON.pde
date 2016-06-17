@@ -54,7 +54,7 @@ void clockwork(uint8_t from, uint8_t *payload) {
 
 	// ringbuf[] is a ring buffer used to send the correct port ID
 	// to the neighbour
-	if (from != 1) {		
+	if (from != 1) {
 		neighbour_msg[6] = ringbuf[ind];
 		int send_0 = com_0.send(addr_180, neighbour_msg, 7);
 	}

@@ -30,30 +30,30 @@ void bootSequence() {
 	// waiting for neighbour to send its address
 	// keep on listening if nothing has been received yet
 	while (!neighbour_addr) {
-		com_0.receive(1000);
-		com_90.receive(1000);
-		com_180.receive(1000);
-		com_270.receive(1000);
+		com_0.receive(15);
+		com_90.receive(15);
+		com_180.receive(15);
+		com_270.receive(15);
 	}
 
 	uint32_t scan_time;
 
-	for (uint8_t i = 0; i < 5; i++) {
+	for (uint8_t i = 0; i < 1; i++) {
 		// send this address to neighbour
 		scan_time = millis();
-		while (millis() - scan_time < 100)
+		while (millis() - scan_time < 50)
 			com_0.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 100)
+		while (millis() - scan_time < 50)
 			com_90.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 100)
+		while (millis() - scan_time < 50)
 			com_180.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 100)
+		while (millis() - scan_time < 50)
 			com_270.update();
 	}
 
@@ -88,7 +88,7 @@ void bootSequence() {
 	int send_master = bus.send(MASTER, edge, 12);
 
 	scan_time = millis();
-	while (millis() - scan_time < 1500)
+	while (millis() - scan_time < 500)
 		bus.update();		
 
 	// int send_master;
