@@ -44,7 +44,7 @@ const uint8_t port_270 = 4;
 
 const uint8_t maxdev = 255; // how many devices are expected at max
 const uint8_t ndev = 7; // initialize arrays of size ndev
-const uint8_t activityLED = 15;
+const uint8_t activityLED = 13;
 char neighbour_msg[7];
 uint32_t scan_time;
 uint8_t maxdepth = 0;

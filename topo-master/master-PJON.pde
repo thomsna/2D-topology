@@ -3,8 +3,11 @@
 #ifndef _MASTER_PJON_PDE_
 #define _MASTER_PJON_PDE_
 
+#include "master-header.pde"
+#include "master-data-structures.pde"
 
-void bus_receiver(uint8_t id, uint8_t *payload, uint8_t length) {
+
+void bus_receiver(uint8_t *payload, uint8_t length, const PacketInfo &packet_info) {
 	if ((char)payload[0] == 'A') {
 		// reassemble the 8-bit UID bytes into a 32-bit number
 		uint32_t node1_UID = (uint32_t)payload[7] << 24 | (uint32_t)payload[8] << 16 | (uint32_t)payload[9] << 8 | (uint32_t)payload[10];

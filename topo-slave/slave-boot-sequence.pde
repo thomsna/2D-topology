@@ -4,6 +4,7 @@
 #define _SLAVE_BOOT_SEQUENCE_PDE_
 
 #include "slave-header.pde"
+#include "slave-helper-func.pde"
 
 
 void bootSequence() {
@@ -24,36 +25,37 @@ void bootSequence() {
 	neighbour_msg[4] = UID[2]; 
 	neighbour_msg[5] = UID[3];
 
+	// make all devices ready at the same time
 	delay(1500-millis());
-	blink(1, 10);
+	blink(1, 100);
 
 	// waiting for neighbour to send its address
 	// keep on listening if nothing has been received yet
 	while (!neighbour_addr) {
-		com_0.receive(15);
-		com_90.receive(15);
-		com_180.receive(15);
-		com_270.receive(15);
+		com_0.receive();
+		com_90.receive();
+		com_180.receive();
+		com_270.receive();
 	}
 
 	uint32_t scan_time;
 
-	for (uint8_t i = 0; i < 1; i++) {
-		// send this address to neighbour
+	// send this address to all neighbours
+	for (uint8_t i = 0; i < 2; i++) {
 		scan_time = millis();
-		while (millis() - scan_time < 50)
+		while (millis() - scan_time < 250)
 			com_0.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 50)
+		while (millis() - scan_time < 250)
 			com_90.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 50)
+		while (millis() - scan_time < 250)
 			com_180.update();
 
 		scan_time = millis();
-		while (millis() - scan_time < 50)
+		while (millis() - scan_time < 250)
 			com_270.update();
 	}
 
@@ -88,7 +90,7 @@ void bootSequence() {
 	int send_master = bus.send(MASTER, edge, 12);
 
 	scan_time = millis();
-	while (millis() - scan_time < 500)
+	while (millis() - scan_time < 1000)
 		bus.update();		
 
 	// int send_master;

@@ -3,6 +3,8 @@
 #ifndef _SLAVE_HELPER_FUNC_PDE_
 #define _SLAVE_HELPER_FUNC_PDE_
 
+#include "slave-header.pde"
+
 
 // create a hash from multiple readings on all analog pins.
 // hash algorithm used is the one-at-a-time hash function
